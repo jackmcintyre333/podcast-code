@@ -4,8 +4,8 @@ import pyttsx3
 import textwrap
 
 # ---------------- SETTINGS ----------------
-openai.api_key = "OPENAI_API_KEY"
-NEWS_API_KEY = "YOUR_NEWSAPI_KEY"   # get from https://newsapi.org/
+openai.api_key = "{OPENAI_API_KEY}"
+NEWS_API_KEY = "{YOUR_NEWSAPI_KEY} "  # get from https://newsapi.org/
 
 def fetch_news(interests, articles_per_topic=2):
     """

@@ -1,0 +1,79 @@
+[dotenv@17.2.3] injecting env (3) from .env.local -- tip: ≡ƒöæ add access controls to secrets: https://dotenvx.com/ops
+≡ƒº¬ News Normalization & Phase 2 Readiness Test
+============================================================
+NewsAPI Key Status: Γ£à Loaded
+
+Fetching news for topics: Technology, Artificial Intelligence
+
+Γ£à Successfully fetched 10 articles
+
+≡ƒöì Validating Article Structure:
+============================================================
+ΓÜá∩╕Å  Article 9: Description is very short (24 chars)
+
+≡ƒôï Validation Summary:
+============================================================
+Total articles validated: 10
+Passed validation: 10
+Failed validation: 0
+Total errors: 0
+Total warnings: 1
+
+Γ£à All articles passed validation!
+
+≡ƒôè Summarization Readiness Analysis:
+============================================================
+Total articles: 10
+Articles with substantial description: 9
+Articles with full content: 10
+Average words per article (title + description): 36
+Total words available for summarization: 364
+Estimated tokens for GPT: ~484
+Γ£à Token count is within safe limits for GPT-4
+
+≡ƒôä Sample Normalized Article (for Phase 2):
+============================================================
+{
+  "title": "A New Light-Based Cancer Treatment Kills Tumor Cells and Spares Healthy Ones",
+  "description": "By combining LED technology and nanomaterials, researchers have created a therapy that eliminates cancer cells using localized heat without damaging healthy tissue.",
+  "url": "https://www.wired.com/story/a-new-light-based-cancer-treatment-kills-tumor-cells-and-spares-healthy-ones/",
+  "source": "Wired",
+  "publishedAt": "2025-11-04T09:30:00Z",
+  "content": "In the fight against cancer, an important field of research is the search for safe alternatives to chemotherapy and radiotherapy. These treatments attack both cancer cells and healthy cells, exposingΓÇª [+2662 chars]"
+}
+
+≡ƒöù Phase 2 Integration Test:
+============================================================
+Testing data format for /api/summarize endpoint...
+
+Sample payload for summarization:
+{
+  "articles": [
+    {
+      "title": "A New Light-Based Cancer Treatment Kills Tumor Cells and Spares Healthy Ones",
+      "content": "By combining LED technology and nanomaterials, researchers have created a therapy that eliminates cancer cells using localized heat without damaging healthy tissue."
+    },
+    {
+      "title": "Inside the Multimillion-Dollar Plan to Make Mobile Voting Happen",
+      "content": "Political consultant Bradley Tusk has spent a fortune on mobile voting efforts. Now, heΓÇÖs launching a protocol to try to mainstream the technology."
+    },
+    {
+      "title": "Is Waymo Ready for the Icy Streets of Detroit and Denver? It Had Better Be, Because ItΓÇÖs Coming",
+      "content": "Buckle up. Autonomous vehicle technology is moving to locales less-than-ideal conditions."
+    },
+    {
+      "title": "China's investment spree in UK gave it access to military-grade technology, BBC told",
+      "content": "Tens of billions of pounds has been spent by the Chinese in the UK since 2000, Panorama has learned."
+    },
+    {
+      "title": "ΓÇÿEyes-off drivingΓÇÖ is coming, and weΓÇÖre so not ready",
+      "content": "Last month, General Motors added its name to the growing list of automakers who are pursuing a novel type of partially automated technology called \"eyes-off driving.\" What they didn't do, though, is provide a thorough description of how they'll take responsibΓÇª"
+    }
+  ]
+}
+
+Γ£à Data structure is compatible with Phase 2 API
+
+============================================================
+≡ƒÄë SUCCESS: News data is properly normalized and ready for Phase 2!
+============================================================

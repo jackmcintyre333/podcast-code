@@ -1,4 +1,5 @@
 import { createClient } from "@/lib/supabase/server"
+import { NewsService } from "@/lib/news/news-service"
 
 export const maxDuration = 60
 
@@ -24,7 +25,7 @@ export async function POST(req: Request) {
 
     for (const subscription of activeUsers) {
       const userId = subscription.user_id
-      const prefs = subscription.user_preferences
+      const prefs = subscription.user_preferences as any
 
       if (!prefs || !prefs.email) continue
 
@@ -34,13 +35,23 @@ export async function POST(req: Request) {
       // Check if it's time to generate podcast for this user
       if (prefs.publication_time === currentTime) {
         // Generate episode here
-        // 1. Fetch news articles based on topics
-        // 2. Summarize articles with AI
-        // 3. Generate TTS audio
-        // 4. Save episode to database
-        // 5. Send email with podcast
-
         console.log(`Generating episode for user: ${userId}`)
+
+        // 1. Fetch news articles based on topics
+        const newsService = new NewsService()
+        // Parse topics from JSONB (assuming it's an array of strings)
+        const topics = Array.isArray(prefs.topics) ? prefs.topics : []
+
+        if (topics.length > 0) {
+          const articles = await newsService.fetchNewsForTopics(topics)
+          console.log(`Fetched ${articles.length} articles for user ${userId}`)
+
+          // 2. Summarize articles with AI (TODO)
+          // 3. Generate TTS audio (TODO)
+          // 4. Save episode to database (TODO)
+          // 5. Send email with podcast (TODO)
+        }
+
         processed++
       }
     }

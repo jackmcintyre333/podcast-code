@@ -1,0 +1,86 @@
+[dotenv@17.2.3] injecting env (3) from .env.local -- tip: ≡ƒöÉ prevent building .env in docker: https://dotenvx.com/prebuild
+≡ƒÄÖ∩╕Å  News Summarization Test
+============================================================
+
+≡ƒöì Debug Info:
+OPENAI_API_KEY exists: true
+OPENAI_API_KEY length: 164
+OPENAI_API_KEY starts with: sk-proj
+
+OpenAI Key Status: Γ£à Loaded
+NewsAPI Key Status: Γ£à Loaded
+
+≡ƒô░ Step 1: Fetching News Articles...
+------------------------------------------------------------
+Γ£à Fetched 10 articles
+
+≡ƒôï Sample Articles to Summarize:
+------------------------------------------------------------
+
+1. A New Light-Based Cancer Treatment Kills Tumor Cells and Spares Healthy Ones
+   Source: Wired
+   Description: By combining LED technology and nanomaterials, researchers have created a therapy that eliminates ca...
+
+2. Inside the Multimillion-Dollar Plan to Make Mobile Voting Happen
+   Source: Wired
+   Description: Political consultant Bradley Tusk has spent a fortune on mobile voting efforts. Now, heΓÇÖs launching ...
+
+3. Is Waymo Ready for the Icy Streets of Detroit and Denver? It Had Better Be, Because ItΓÇÖs Coming
+   Source: Gizmodo.com
+   Description: Buckle up. Autonomous vehicle technology is moving to locales less-than-ideal conditions....
+
+4. China's investment spree in UK gave it access to military-grade technology, BBC told
+   Source: BBC News
+   Description: Tens of billions of pounds has been spent by the Chinese in the UK since 2000, Panorama has learned....
+
+5. ΓÇÿEyes-off drivingΓÇÖ is coming, and weΓÇÖre so not ready
+   Source: The Verge
+   Description: Last month, General Motors added its name to the growing list of automakers who are pursuing a novel...
+
+
+≡ƒñû Step 2: Generating AI Podcast Script...
+------------------------------------------------------------
+Calling OpenAI GPT-4...
+
+Γ¥î Error: AuthenticationError: 401 Incorrect API key provided: sk-proj-********************************************************************************************************************************************************ApQA. You can find your API key at https://platform.openai.com/account/api-keys.
+    at Function.generate (C:\Users\jackm\OneDrive\Documents\Podcast-Code\podcast-code\code\node_modules\openai\src\core\error.ts:76:14)
+    at OpenAI.makeStatusError (C:\Users\jackm\OneDrive\Documents\Podcast-Code\podcast-code\code\node_modules\openai\src\client.ts:478:28)
+    at OpenAI.makeRequest (C:\Users\jackm\OneDrive\Documents\Podcast-Code\podcast-code\code\node_modules\openai\src\client.ts:728:24)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async testSummarization (C:\Users\jackm\OneDrive\Documents\Podcast-Code\podcast-code\code\scripts\test-summarization.ts:79:28) {
+  status: 401,
+  headers: Headers {
+    date: 'Wed, 26 Nov 2025 16:34:54 GMT',
+    'content-type': 'text/plain',
+    'content-length': '393',
+    connection: 'keep-alive',
+    'x-openai-ide-error-code': 'invalid_api_key',
+    'x-openai-authorization-error': '401',
+    'x-error-json': 'ewogICJlcnJvciI6IHsKICAgICJtZXNzYWdlIjogIkluY29ycmVjdCBBUEkga2V5IHByb3ZpZGVkOiBzay1wcm9qLSoqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqQXBRQS4gWW91IGNhbiBmaW5kIHlvdXIgQVBJIGtleSBhdCBodHRwczovL3BsYXRmb3JtLm9wZW5haS5jb20vYWNjb3VudC9hcGkta2V5cy4iLAogICAgInR5cGUiOiAiaW52YWxpZF9yZXF1ZXN0X2Vycm9yIiwKICAgICJjb2RlIjogImludmFsaWRfYXBpX2tleSIsCiAgICAicGFyYW0iOiBudWxsCiAgfQp9',
+    'x-request-id': 'req_b77535a56c4f494eb665c8bd84c7b1f7',
+    'x-datadog-trace-id': '13930890892954770442',
+    'x-datadog-parent-id': '11215209782434207599',
+    'x-datadog-sampling-priority': '0',
+    'x-openai-internal-caller': 'unknown_through_ide',
+    'x-envoy-upstream-service-time': '3',
+    'x-openai-proxy-wasm': 'v0.1',
+    'cf-cache-status': 'DYNAMIC',
+    'set-cookie': '__cf_bm=UavTiDzUeSnpo1VXRxgo6pI82iVYLGfewPboY48AxrI-1764174894-1.0.1.1-VLwRNIY8G4q8q5_r791tDNLXHAX.kiddZVTEBeHgrIBXGqr9Sp3dSGYbOcycoyXIiyE96gYQg7iKIZdmTHBvRyTDs_bU_Kg3GzUbnt0QM5U; path=/; expires=Wed, 26-Nov-25 17:04:54 GMT; domain=.api.openai.com; HttpOnly; Secure; SameSite=None, _cfuvid=VDZdAaxzttLyqPFWTtdC14skI0mHAV4xJTQmhsHuGjU-1764174894943-0.0.1.1-604800000; path=/; domain=.api.openai.com; HttpOnly; Secure; SameSite=None',
+    'strict-transport-security': 'max-age=31536000; includeSubDomains; preload',
+    'x-content-type-options': 'nosniff',
+    server: 'cloudflare',
+    'cf-ray': '9a4acbc52e75c94b-IAD',
+    'alt-svc': 'h3=":443"; ma=86400'
+  },
+  requestID: 'req_b77535a56c4f494eb665c8bd84c7b1f7',
+  error: {
+    message: 'Incorrect API key provided: sk-proj-********************************************************************************************************************************************************ApQA. You can find your API key at https://platform.openai.com/account/api-keys.',
+    type: 'invalid_request_error',
+    code: 'invalid_api_key',
+    param: null
+  },
+  code: 'invalid_api_key',
+  param: null,
+  type: 'invalid_request_error'
+}
+Error message: 401 Incorrect API key provided: sk-proj-********************************************************************************************************************************************************ApQA. You can find your API key at https://platform.openai.com/account/api-keys.

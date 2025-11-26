@@ -1,0 +1,33 @@
+[dotenv@17.2.3] injecting env (3) from .env.local -- tip: ΓÜÖ∩╕Å  load multiple .env files with { path: ['.env.local', '.env'] }
+Dotenv loading result: SUCCESS
+
+≡ƒôï Environment Variables Loaded:
+============================================================
+OPENAI_API_KEY exists: true
+OPENAI_API_KEY length: 164
+OPENAI_API_KEY (first 10 chars): sk-proj-Rz
+OPENAI_API_KEY (last 10 chars): XyFVsPApQA
+
+Whitespace check:
+  Original length: 164
+  Trimmed length: 164
+  Has leading whitespace: false
+  Has trailing whitespace: false
+  Has invisible characters: false
+
+Character codes (first 5):
+    [0]: 's' (code: 115)
+    [1]: 'k' (code: 107)
+    [2]: '-' (code: 45)
+    [3]: 'p' (code: 112)
+    [4]: 'r' (code: 114)
+
+Character codes (last 5):
+    [159]: 'P' (code: 80)
+    [160]: 'A' (code: 65)
+    [161]: 'p' (code: 112)
+    [162]: 'Q' (code: 81)
+    [163]: 'A' (code: 65)
+
+============================================================
+Γ£à Diagnostic complete!

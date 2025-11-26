@@ -1,0 +1,18 @@
+Testing News Aggregation Engine...
+Fetching news for topics: Technology, Space Exploration
+
+Successfully fetched 200 articles.
+
+Sample Articles:
+
+1. How modern technology is reshaping military operations in the Indo-Pacific - Breaking Defense
+   Source: Google News
+   URL: https://news.google.com/rss/articles/CBMisAFBVV95cUxOQkFiMXN0cGNLZzVmekUyaW44S0RzZ1VSTHNtR1pPWVJNXzJiTTVtZ3doTmw5YnZxM1N6YnYyN0Y5cE84aTlORllPQ2l0OHh6X0Yyc2x2VS1zTHpzLVlUNzhSSVFndktSaW9zZlE5RER5cmJXTng2aExDamxndHJwRkVoaGdMVk5EOThKZmtrLVA5WEJGSDB5cUJ2RzdtUUJWYUFZN0M4VFk4OUwwcGY4Tg?oc=5
+
+2. Drone swarms to be fried by high-powered microwave tech - The Jerusalem Post
+   Source: Google News
+   URL: https://news.google.com/rss/articles/CBMiY0FVX3lxTE45S3F3dHd6V2swb2N4RHpNN0xScmRBVVkxZmdtRnpYLUNkR180R2l4VzZhTGdKeElfNmtldzZDMXZKTHA3M1FNZkdSRnhHOEQ3X0hINFBMbmdXZ2UwS0stbjM0SQ?oc=5
+
+3. Progressive Caucus opposes push to add AI preemption provision to defense bill - The Hill
+   Source: Google News
+   URL: https://news.google.com/rss/articles/CBMiwwFBVV95cUxPeExXU1Ffb1NFdTlzNm5TZEpvcDByYWh4Zk9sLS1GOHVDMnpoUkp2Y1hUYVFvTmFRanlKZG5iRHJZVjR2VFV3andfVHZrWkdoSkRWQ0w0aFVSN2hoRlZVWjJOMjREbnBnRHFoYnhLUGFYSHZvMDk0WUZQY1VtbWlfTHU1cGJnUjJzeGREWGhJWWtZWjJrc2o5Wnhtc0NZeEtDMFpTenFzeFBmZnhOX1g2b3pVYnhQXzQxWW5LVlQ2RjY5NWPSAcgBQVVfeXFMTzlzQkwyT2hEOVBYT2pfaXhzazhOQVF4cUhINHhURW9nb2VZb0s5bVp6YVo1UWtCSW5JNmdlbkhKbEJneWdoYUU0eDkyeUFxWWVzQWw2U0xPR2ZsbmtGdTl1VjUtRkZpTXhoQmNPM0dJRHlzbHFrMUNmRmM3aEZEdlpjQ1BjeUxmNTRsVHdLR2x0VEdieTJGb0VBelRoSV9zekVwSGJGLUZ3RGowdmtEZ3RqYmROcWFWY2JqWVQyalJEOTNDVktIRjM?oc=5

@@ -1,9 +1,13 @@
 import { config } from "dotenv"
+import path from "path"
 import { NewsService } from "../lib/news/news-service"
 import OpenAI from "openai"
 
 // Load .env.local file
-config({ path: ".env.local" })
+config({
+    path: path.resolve(__dirname, "..", ".env.local"),
+    override: true,
+  })
 
 async function testSummarization() {
     console.log("🎙️  News Summarization Test")
@@ -14,6 +18,7 @@ async function testSummarization() {
     console.log(`OPENAI_API_KEY exists: ${!!process.env.OPENAI_API_KEY}`)
     console.log(`OPENAI_API_KEY length: ${process.env.OPENAI_API_KEY?.length || 0}`)
     console.log(`OPENAI_API_KEY starts with: ${process.env.OPENAI_API_KEY?.substring(0, 7) || "N/A"}`)
+    console.log(`OPENAI_API_KEY ends with: ${process.env.OPENAI_API_KEY?.slice(-4) || "N/A"}`)
 
     console.log(`\nOpenAI Key Status: ${process.env.OPENAI_API_KEY ? "✅ Loaded" : "❌ Missing"}`)
     console.log(`NewsAPI Key Status: ${process.env.NEWS_API_KEY ? "✅ Loaded" : "❌ Missing (using RSS)"}`)

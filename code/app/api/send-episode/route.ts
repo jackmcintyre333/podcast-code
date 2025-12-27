@@ -1,28 +1,53 @@
 import { createClient } from "@/lib/supabase/server"
+import { sendEpisodeEmail } from "@/lib/email/resend"
 
 export const maxDuration = 30
 
 export async function POST(req: Request) {
   try {
-    const { userId, episodeId, audioUrl, summary } = await req.json()
+    const { userId, episodeId } = await req.json()
 
-    if (!userId || !episodeId || !audioUrl) {
+    if (!userId || !episodeId) {
       return Response.json({ error: "Missing required fields" }, { status: 400 })
     }
 
-    // In production, integrate with Resend:
-    // const { data, error } = await resend.emails.send({
-    //   from: "CommuteCast <noreply@commutecast.com>",
-    //   to: userEmail,
-    //   subject: "Your Daily CommuteCast Podcast",
-    //   html: emailTemplate(audioUrl, summary),
-    // })
+    const supabase = await createClient()
 
-    console.log("Email sent for episode:", episodeId)
+    // Fetch user email and episode details
+    const { data: profile, error: profileError } = await supabase
+      .from("user_profiles")
+      .select("email")
+      .eq("id", userId)
+      .single()
+
+    if (profileError || !profile?.email) {
+      console.error("Failed to fetch user profile for email:", profileError)
+      return Response.json({ error: "User email not found" }, { status: 400 })
+    }
+
+    const { data: episode, error: episodeError } = await supabase
+      .from("episodes")
+      .select("title, audio_url, summary")
+      .eq("id", episodeId)
+      .single()
+
+    if (episodeError || !episode?.audio_url) {
+      console.error("Failed to fetch episode for email:", episodeError)
+      return Response.json({ error: "Episode not found" }, { status: 400 })
+    }
+
+    // Send email via Resend
+    await sendEpisodeEmail({
+      to: profile.email,
+      audioUrl: episode.audio_url,
+      summary: episode.summary ?? undefined,
+      episodeTitle: episode.title ?? undefined,
+    })
 
     // Update episode sent_at timestamp
-    const supabase = await createClient()
     await supabase.from("episodes").update({ sent_at: new Date().toISOString() }).eq("id", episodeId)
+
+    console.log("Email sent for episode:", episodeId)
 
     return Response.json({ success: true })
   } catch (error) {

@@ -1,4 +1,5 @@
 export const maxDuration = 60
+import { generatePodcastAudioFromScript } from "@/lib/tts"
 
 export async function POST(req: Request) {
   try {
@@ -21,13 +22,12 @@ export async function POST(req: Request) {
 }
 
 async function generateAudioWithTTS(text: string): Promise<string> {
-  // Placeholder for TTS integration
-  // In production:
-  // 1. Call Play.ht or Azure Speech Services API
-  // 2. Convert script to audio
-  // 3. Upload to S3 or similar storage
-  // 4. Return signed URL
-
-  console.log("Generating TTS for:", text.substring(0, 50))
-  return "https://example.com/podcast-audio.mp3"
+  // Use OpenAI TTS via lib/tts and upload to Supabase Storage
+  try {
+    const { audioUrl } = await generatePodcastAudioFromScript(text);
+    return audioUrl;
+  } catch (err) {
+    console.error("TTS generation failed:", err);
+    throw err;
+  }
 }

@@ -4,7 +4,16 @@ import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
 import { createClient } from "@/lib/supabase/client"
 import Link from "next/link"
-import { Podcast, ArrowLeft, Save } from "lucide-react"
+import { Podcast, ArrowLeft, Save, Play, Loader2 } from "lucide-react"
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog"
 
 const AVAILABLE_TOPICS = [
   "Technology",
@@ -30,6 +39,8 @@ export default function PreferencesPage() {
   })
   const [loading, setLoading] = useState(true)
   const [saving, setSaving] = useState(false)
+  const [generating, setGenerating] = useState(false)
+  const [isGenerateOpen, setIsGenerateOpen] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const router = useRouter()
   const supabase = createClient()
@@ -121,7 +132,7 @@ export default function PreferencesPage() {
           hint: supabaseError.hint,
           code: supabaseError.code,
         })
-        
+
         // Check if it's a foreign key constraint error (profile doesn't exist)
         if (supabaseError.code === "23503" || supabaseError.message?.includes("foreign key")) {
           setError(
@@ -141,6 +152,44 @@ export default function PreferencesPage() {
       setError(errorMessage)
     } finally {
       setSaving(false)
+    }
+  }
+
+  const handleGenerate = async () => {
+    if (!user) return
+    setGenerating(true)
+    setError(null)
+
+    try {
+      // 1. Save preferences first to ensure we use the latest
+      await handleSave()
+
+      // 2. Call generate API
+      const response = await fetch("/api/generate-episode", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          topics: preferences.topics,
+          length: preferences.podcast_length,
+        }),
+      })
+
+      const data = await response.json()
+
+      if (!response.ok) {
+        throw new Error(data.error || "Failed to generate episode")
+      }
+
+      // 3. Redirect to player or episodes list
+      // For now, let's go to the episodes page where the new episode should appear
+      router.push("/dashboard/episodes")
+    } catch (err) {
+      console.error("Generation error:", err)
+      setError(err instanceof Error ? err.message : "Failed to generate episode")
+      setGenerating(false)
+      setIsGenerateOpen(false)
     }
   }
 
@@ -191,11 +240,10 @@ export default function PreferencesPage() {
                 <button
                   key={topic}
                   onClick={() => handleTopicToggle(topic)}
-                  className={`rounded-lg px-4 py-3 text-sm font-medium transition-colors ${
-                    preferences.topics.includes(topic)
+                  className={`rounded-lg px-4 py-3 text-sm font-medium transition-colors ${preferences.topics.includes(topic)
                       ? "bg-primary text-primary-foreground"
                       : "border border-input bg-card text-foreground hover:bg-muted"
-                  }`}
+                    }`}
                 >
                   {topic}
                 </button>
@@ -261,6 +309,56 @@ export default function PreferencesPage() {
             <Save className="h-5 w-5" />
             {saving ? "Saving..." : "Save Preferences"}
           </button>
+
+          {/* Generate Button & Dialog */}
+          <Dialog open={isGenerateOpen} onOpenChange={setIsGenerateOpen}>
+            <DialogTrigger asChild>
+              <button
+                disabled={saving || generating || preferences.topics.length === 0}
+                className="w-full flex items-center justify-center gap-2 rounded-lg border border-primary bg-card px-6 py-3 font-medium text-primary hover:bg-primary/10 disabled:opacity-50 transition-colors"
+              >
+                {generating ? (
+                  <Loader2 className="h-5 w-5 animate-spin" />
+                ) : (
+                  <Play className="h-5 w-5" />
+                )}
+                {generating ? "Generating..." : "Generate Podcast Now"}
+              </button>
+            </DialogTrigger>
+            <DialogContent>
+              <DialogHeader>
+                <DialogTitle>Generate New Episode?</DialogTitle>
+                <DialogDescription>
+                  This will create a new podcast episode based on your selected topics:{" "}
+                  <span className="font-medium text-foreground">
+                    {preferences.topics.join(", ")}
+                  </span>
+                  .
+                </DialogDescription>
+              </DialogHeader>
+              <div className="py-4">
+                <p className="text-sm text-muted-foreground">
+                  The process usually takes about 30-60 seconds. You will be redirected to your episodes once it's ready.
+                </p>
+              </div>
+              <DialogFooter>
+                <button
+                  onClick={() => setIsGenerateOpen(false)}
+                  className="rounded-lg px-4 py-2 text-sm font-medium text-muted-foreground hover:text-foreground"
+                >
+                  Cancel
+                </button>
+                <button
+                  onClick={handleGenerate}
+                  disabled={generating}
+                  className="flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:opacity-90 disabled:opacity-50"
+                >
+                  {generating && <Loader2 className="h-4 w-4 animate-spin" />}
+                  {generating ? "Generating..." : "Confirm & Generate"}
+                </button>
+              </DialogFooter>
+            </DialogContent>
+          </Dialog>
         </div>
       </main>
     </div>
